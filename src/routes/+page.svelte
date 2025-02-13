@@ -1,4 +1,8 @@
 <script>
+// @ts-nocheck
+
+	import { fly } from 'svelte/transition';
+
 	// @ts-nocheck
 
 	import Header from './Header.svelte';
@@ -62,16 +66,15 @@
 		}
 	}
 
-	$effect(()=>{
-		console.log("on Mount")
-		return(()=>{
-			console.log("on Unmount");
-		})
-	})
+	$effect(() => {
+		console.log('on Mount');
+		return () => {
+			console.log('on Unmount');
+		};
+	});
 
-	$inspect(formState.step)
+	$inspect(formState.step);
 </script>
-
 
 <Header prop={formState.answer.name}>
 	<h1>i am Child 1 of Header</h1>
@@ -141,7 +144,12 @@
 
 	{#each QUESTIONS as question, index (question.id)}
 		{#if formState.step === index}
-			{@render formStep(question)}
+			<div
+				in:fly={{ x: 200, duration: 200, opacity: 0, delay: 200 }}
+				out:fly={{ x: -200, duration: 200, opacity: 0 }}
+			>
+				{@render formStep(question)}
+			</div>
 		{/if}
 	{/each}
 
