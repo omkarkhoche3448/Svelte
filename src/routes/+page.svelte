@@ -61,7 +61,17 @@
 			formState.error = 'Please fill out the field.';
 		}
 	}
+
+	$effect(()=>{
+		console.log("on Mount")
+		return(()=>{
+			console.log("on Unmount");
+		})
+	})
+
+	$inspect(formState.step)
 </script>
+
 
 <Header prop={formState.answer.name}>
 	<h1>i am Child 1 of Header</h1>
