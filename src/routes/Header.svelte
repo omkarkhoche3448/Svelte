@@ -1,11 +1,19 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
+	import { createState } from './state.svelte.js';
+	import {counterClass} from './state.svelte.js'
 
 	let { prop ,children,secondChild}:{
 		prop:String,
 		children:Snippet,
 		secondChild:Snippet
 	}= $props();
+
+	const myState = createState();
+	const myCount = new counterClass();
+	$inspect(myState.value);
+
+
 </script>
 
 <div>
@@ -15,7 +23,8 @@
 	 <!-- {@render children()}
 
 	<h3> {@render secondChild('I am Sec Child')}</h3> -->
-
+	<button onclick={myState.up} >{myState.value}</button>
+	<button onclick={()=>{ myCount.up()}} >{myCount.value}</button>
 </div>
 
 <style>
